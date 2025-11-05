@@ -1,27 +1,25 @@
 package fr.eni.ludotheque.bo;
 
-import jakarta.persistence.*;
 import lombok.*;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Entity
-@Table(name="EXEMPLAIRES")
+@Document(collection="EXEMPLAIRES")
 public class Exemplaire {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@EqualsAndHashCode.Exclude
-	private Integer noExemplaire;
+	private String noExemplaire;
 	
-	@Column(length=13, nullable = false, unique = true)
+
 	@NonNull private String codebarre;
-	
-	@Basic(optional = false)
+
+    @NonNull
 	private boolean louable=true;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="no_jeu", referencedColumnName = "no_jeu")
+
 	@NonNull
 	private Jeu jeu;
 	

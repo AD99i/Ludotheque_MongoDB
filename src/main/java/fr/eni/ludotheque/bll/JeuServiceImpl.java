@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import fr.eni.ludotheque.bo.Exemplaire;
+import fr.eni.ludotheque.dal.LocationRepository;
 import org.springframework.stereotype.Service;
 
 import fr.eni.ludotheque.bo.Jeu;
@@ -21,6 +22,9 @@ public class JeuServiceImpl implements JeuService{
 	
 	@NonNull
 	private ExemplaireRepository exemplaireRepository;
+
+    @NonNull
+    private LocationService locationService;
 	
 	@Override
 	public void ajouterJeu(Jeu jeu) {
@@ -32,7 +36,7 @@ public class JeuServiceImpl implements JeuService{
 
 
 	@Override
-	public Jeu trouverJeuParNoJeu(Integer noJeu) {
+	public Jeu trouverJeuParNoJeu(String noJeu) {
 		Optional<Jeu> optJeu = jeuRepository.findById(noJeu);
 		
 		if(optJeu.isEmpty()) {
@@ -45,12 +49,13 @@ public class JeuServiceImpl implements JeuService{
 
 	@Override
 	public List<Jeu> listeJeuxCatalogue(String filtreTitre) {
-		List<Jeu> jeux = jeuRepository.findAllJeuxAvecNbExemplaires(filtreTitre);
+		List<Jeu> jeux = jeuRepository.findByTitreContainingIgnoreCase(filtreTitre);
 		
 		for(Jeu jeu : jeux) {
-			int nbExemplairesDisponibles = exemplaireRepository.nbExemplairesDisponibleByNoJeu(jeu.getNoJeu());
-			jeu.setNbExemplairesDisponibles(nbExemplairesDisponibles);
-		}
+            int nbExemplairesDisponibles = locationService.nbExemplairesDisponibleByNoJeu(jeu.getNoJeu());
+            jeu.setNbExemplairesDisponibles(nbExemplairesDisponibles);
+
+        }
 		
 		return jeux;
 	}

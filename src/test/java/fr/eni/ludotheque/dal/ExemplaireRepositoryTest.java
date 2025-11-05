@@ -3,11 +3,12 @@ package fr.eni.ludotheque.dal;
 import fr.eni.ludotheque.bo.Exemplaire;
 import fr.eni.ludotheque.bo.Genre;
 import fr.eni.ludotheque.bo.Jeu;
-import jakarta.transaction.Transactional;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,8 +29,8 @@ public class ExemplaireRepositoryTest {
 		Jeu jeu = new Jeu("SkyJo", "refSkyJo", 5.6f );
 		jeu.setAgeMin(8);
 		jeu.setDescription("Descr skyjo");
-		jeu.addGenre(new Genre(1, ""));
-		jeu.addGenre(new Genre(2, ""));
+		jeu.addGenre(new Genre("1", ""));
+		jeu.addGenre(new Genre("2", ""));
 		Jeu jeuBD = jeuRepository.save(jeu);
 		Exemplaire skyJoBoite1 = new Exemplaire("1414141414141", jeuBD);
 

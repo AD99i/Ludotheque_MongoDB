@@ -1,8 +1,6 @@
 package fr.eni.ludotheque.bo;
 
-import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -11,19 +9,17 @@ import java.util.List;
 
 @Data
 @RequiredArgsConstructor
-@Entity
-@Table(name="FACTURES")
+
+
 public class Facture {
+
+
+	private String noFacture;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer noFacture;
-	
-	@Basic(optional = true)
+
 	private LocalDateTime datePaiement;
 	
-	@OneToMany
-	@JoinColumn(name="no_facture")
+
 	private List<Location> locations=new ArrayList<Location>();
 	
 	

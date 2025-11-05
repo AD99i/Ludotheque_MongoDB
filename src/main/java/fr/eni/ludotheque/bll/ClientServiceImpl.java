@@ -2,7 +2,6 @@ package fr.eni.ludotheque.bll;
 
 import fr.eni.ludotheque.bo.Adresse;
 import fr.eni.ludotheque.bo.Client;
-import fr.eni.ludotheque.dal.AdresseRepository;
 import fr.eni.ludotheque.dal.ClientRepository;
 import fr.eni.ludotheque.dto.AdresseDTO;
 import fr.eni.ludotheque.dto.ClientDTO;
@@ -23,8 +22,7 @@ import java.util.Optional;
 public class ClientServiceImpl implements ClientService{
 	@NonNull
 	private ClientRepository clientRepository;
-	@NonNull
-	private AdresseRepository adresseRepository;
+
 	
 	@Override
 	public Client ajouterClient(ClientDTO clientDto)  {
@@ -52,7 +50,7 @@ public class ClientServiceImpl implements ClientService{
 
 	@Override
 	/* S2010 - Modification complète d'un client */
-	public Client modifierClient(Integer noClient, ClientDTO clientDto) {
+	public Client modifierClient(String noClient, ClientDTO clientDto) {
 		//Client client = clientRepository.findById(noClient).orElseThrow(()->new DataNotFound("Client", noClient));
 		Client client = new Client();
 		client.setNoClient(noClient);
@@ -71,7 +69,7 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 	@Override
-	public Client trouverClientParId(Integer id)  {
+	public Client trouverClientParId(String id)  {
 
 		Optional<Client> optClient = clientRepository.findById(id);
 		if(optClient.isEmpty()) {
@@ -81,19 +79,19 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 	@Override
-	public Client modifierAdresse(Integer noClient, AdresseDTO adresseDto) {
+	public Client modifierAdresse(String noClient, AdresseDTO adresseDto) {
 		Client client = clientRepository.findById(noClient).orElseThrow(()->new DataNotFound("Client", noClient));
 
 		BeanUtils.copyProperties(adresseDto, client.getAdresse());
 
-		adresseRepository.save(client.getAdresse());
+        clientRepository.save(client);
 
-		return client;
+        return client;
 
 	}
 
     @Override
-    public void supprimerClient(Integer id) {
+    public void supprimerClient(String id) {
         clientRepository.deleteById(id);
     }
 }

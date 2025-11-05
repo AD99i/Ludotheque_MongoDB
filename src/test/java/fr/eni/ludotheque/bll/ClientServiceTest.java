@@ -39,7 +39,7 @@ public class ClientServiceTest {
 		Adresse adresse = new Adresse("rue des Cormorans", "44860", "Saint Aignan Grand Lieu");
 		Client client = new Client("n1", "p1", "e1", adresse);
 		client.setNoTelephone("tel1");
-		client.setNoClient(999);
+		client.setNoClient("999");
 
 		/*
 		org.mockito.Mockito.doAnswer((invocation) -> {
@@ -56,7 +56,7 @@ public class ClientServiceTest {
 		//Assert
 		assertThat(clientActual).isNotNull();
 		assertThat(clientActual.getNoClient()).isNotNull();
-		assertThat(clientActual.getNoClient()).isEqualTo(999);
+		assertThat(clientActual.getNoClient()).isEqualTo("999");
 		
 	}
 
@@ -64,7 +64,7 @@ public class ClientServiceTest {
 	@DisplayName("Trouver un client par id cas id est connu")
 	public void testTrouverClientParIdCasIdConnu() {
 		//Arrange
-		Integer idClientRecherche = 99;
+		String idClientRecherche = "99";
 		Adresse adresse = new Adresse("rue des Cormorans", "44860", "Saint Aignan Grand Lieu");
 		Client clientATrouver = new Client("n1", "p1", "e1",  adresse);
 		clientATrouver.setNoTelephone("tel1");
@@ -82,7 +82,7 @@ public class ClientServiceTest {
 	@DisplayName("Trouver un client par id cas id est inconnu-doit renvoyer une exception ")
 	public void testTrouverClientParIdCasIdIncconnu() {
 		//Arrange
-		Integer idClientRecherche = 99;
+		String idClientRecherche = "99";
 		when(clientRepository.findById(idClientRecherche)).thenReturn(Optional.empty());
 
 		//Act + Assert

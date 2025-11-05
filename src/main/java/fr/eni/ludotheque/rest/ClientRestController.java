@@ -34,20 +34,20 @@ public class ClientRestController {
 
 
     @DeleteMapping("clients/{id}")
-    public ResponseEntity<Void> deleteClient(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteClient(@PathVariable String id) {
         clientService.supprimerClient(id);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PutMapping("clients/{id}")
-    public ResponseEntity<?> updateClient(@PathVariable Integer id, @RequestBody ClientDTO clientDTO) {
+    public ResponseEntity<?> updateClient(@PathVariable String id, @RequestBody ClientDTO clientDTO) {
         clientService.modifierClient(id, clientDTO);
         return ResponseEntity.status(HttpStatus.OK).body(clientDTO);
     }
 
     @PatchMapping("clients/{id}")
-    public ResponseEntity<?> updateClient(@RequestBody AdresseDTO adresseDTO, @PathVariable Integer id) {
+    public ResponseEntity<?> updateClient(@RequestBody AdresseDTO adresseDTO, @PathVariable String id) {
         clientService.modifierAdresse(id,adresseDTO);
         return ResponseEntity.status(HttpStatus.OK).body(adresseDTO);
     }
@@ -60,7 +60,7 @@ public class ClientRestController {
     }
 
     @GetMapping("clients/{id}")
-    public ResponseEntity<Client> findClientById(@PathVariable Integer id) {
+    public ResponseEntity<Client> findClientById(@PathVariable String id) {
         Client client = clientService.trouverClientParId(id);
         return ResponseEntity.status(HttpStatus.OK).body(client);
     }

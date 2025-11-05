@@ -1,11 +1,18 @@
 package fr.eni.ludotheque.dal;
 
+import fr.eni.ludotheque.bo.Exemplaire;
 import fr.eni.ludotheque.bo.Location;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-public interface LocationRepository extends JpaRepository<Location, Integer>{
-    @Query("SELECT l FROM Location l WHERE l.exemplaire.codebarre = :codebarre")
-    Location findLocationByCodebarreWithJeu(@Param("codebarre") String codebarre);
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.List;
+
+
+public interface LocationRepository extends MongoRepository<Location, String> {
+    Location findLocationByExemplaireCodebarre(String codebarre);
+
+    List<Location> findByFactureNoFacture(String noFacture);
+
+    boolean existsByExemplaireAndDateRetourIsNull(Exemplaire exemplaire);
+
 }

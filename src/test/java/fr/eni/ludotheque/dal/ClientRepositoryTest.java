@@ -2,11 +2,12 @@ package fr.eni.ludotheque.dal;
 
 import fr.eni.ludotheque.bo.Adresse;
 import fr.eni.ludotheque.bo.Client;
-import jakarta.transaction.Transactional;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

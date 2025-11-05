@@ -1,19 +1,19 @@
 package fr.eni.ludotheque.bo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.Id;
 
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Entity
-@Table(name="GENRES")
 public class Genre {
-	@Id
+
+    @Id
 	@NonNull
-	private Integer noGenre;
+	private String noGenre;
 
 	@NonNull private String libelle;
 	
