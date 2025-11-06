@@ -3,9 +3,11 @@ spring:
     name: ludotheque
   data:
     mongodb:
-      username: sa
-      password: Passw0rd
-      host: localhost
-      port: 27017
+      #username: sa
+      #password: Passw0rd
+      #host: localhost
+      #port: 27017
       database: LUDO_DB
-      authentication-database: admin
+      uri: mongodb://user:pass@192.168.50.128:27017
+      #authentication-database: admin
+      auto-index-creation: true

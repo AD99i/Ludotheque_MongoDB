@@ -7,22 +7,36 @@ import fr.eni.ludotheque.dto.AdresseDTO;
 import fr.eni.ludotheque.dto.ClientDTO;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequiredArgsConstructor
 //@Controller + @ResponseBody
 public class ClientRestController {
+
+    static Logger log = LoggerFactory.getLogger(ClientRestController.class.getName());
+
 
     @NonNull
     private ClientService clientService;
 
     @PostMapping("/clients")
     public ResponseEntity<?> ajouterClient(@RequestBody ClientDTO clientDTO) {
+
+        log.trace("niveau trace");
+        log.debug("niveau debug");
+        log.info("ajouterClient");
+        log.warn("niveau warn");
+        log.error("niveau error");
 
 
          Client client = clientService.ajouterClient(clientDTO);
@@ -52,8 +66,8 @@ public class ClientRestController {
         return ResponseEntity.status(HttpStatus.OK).body(adresseDTO);
     }
 
-    @GetMapping("clients/{nom}")
-    public ResponseEntity<List<Client>> findClientByNom(@PathVariable String nom) {
+    @GetMapping("clients")
+    public ResponseEntity<List<Client>> findClientByNom(@RequestParam String nom) {
 
         List<Client> listeClients = clientService.trouverClientsParNom(nom);
         return ResponseEntity.status(HttpStatus.OK).body(listeClients);
