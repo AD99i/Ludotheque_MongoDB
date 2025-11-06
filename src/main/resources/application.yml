@@ -8,6 +8,6 @@ spring:
       #host: localhost
       #port: 27017
       database: LUDO_DB
-      uri: mongodb://user:pass@192.168.50.128:27017
+      uri: mongodb+srv://zawarudo:zawarudo@cluster0.4bgfpg7.mongodb.net/?appName=Cluster0
       #authentication-database: admin
       auto-index-creation: true
